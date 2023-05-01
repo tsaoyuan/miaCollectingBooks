@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserRegisterEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class ThirdPartyAuthController extends Controller
@@ -33,6 +35,7 @@ class ThirdPartyAuthController extends Controller
         ]);
 
         Auth::login($user);
+        Mail::to($user->email)->send(new UserRegisterEmail($user));
         return $user;
 
 //        return $this->loginToken($providerUser->token, $provider);
