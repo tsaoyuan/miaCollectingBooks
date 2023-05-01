@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserRegisterEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -45,6 +47,7 @@ class RegisterController extends Controller
                 $validated, ['password' => Hash::make($validated['password'])]
             )
         );
+        Mail::to($user->email)->send(new UserRegisterEmail($user));
 
 //        return 'registered';
 //        return response([
