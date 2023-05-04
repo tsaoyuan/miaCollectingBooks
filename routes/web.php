@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//Route::get('/dynamic-head', function () {
+////    dd('dynamic-head');
+//    return view('components.dynamic-head');
+//});
 Route::get('/', function () {
-    return view('welcome');
+    $page_description = 'This is my render message.';
+    return view('welcome', ['page_description' => $page_description]);
 });
+
 Route::get('login', function () {
-    return view('sessions.create');
+    $page_description = 'This is my login render message.';
+    return view('sessions.create', ['page_description' => $page_description]);
 });
 Route::post('login', [\App\Http\Controllers\SessionsController::class, 'store']);
 Route::get('register', [\App\Http\Controllers\WebRegisterController::class, 'create']);
@@ -29,3 +35,5 @@ Route::prefix('auth')->group( function() {
     Route::get('/{provider}/', [\App\Http\Controllers\ThirdPartyAuthController::class, 'redirectToProvider']);
     Route::get('/{provider}/callback', [\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
 });
+
+
