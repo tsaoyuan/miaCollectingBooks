@@ -12,28 +12,34 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Route::get('/dynamic-head', function () {
-////    dd('dynamic-head');
-//    return view('components.dynamic-head');
-//});
+
 Route::get('/', function () {
     $page_description = 'This is my render message.';
     return view('welcome', ['page_description' => $page_description]);
 });
 
-Route::get('login', function () {
-    $page_description = 'This is my login render message.';
-    return view('sessions.create', ['page_description' => $page_description]);
-});
+Route::get('login', [\App\Http\Controllers\SessionsController::class, 'create'])->name('login');
 Route::post('login', [\App\Http\Controllers\SessionsController::class, 'store']);
 Route::get('register', [\App\Http\Controllers\WebRegisterController::class, 'create']);
 Route::post('register', [\App\Http\Controllers\WebRegisterController::class, 'store']);
 Route::post('logout', [\App\Http\Controllers\SessionsController::class, 'destroy']);
 
 //OAuth 第三方登入
-Route::prefix('auth')->group( function() {
+Route::prefix('auth')->group(function () {
     Route::get('/{provider}/', [\App\Http\Controllers\ThirdPartyAuthController::class, 'redirectToProvider']);
     Route::get('/{provider}/callback', [\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
 });
 
+//Route::get('forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'create'])
+//    ->middleware('guest')->name('password.request');
+//Route::post('forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'store']);
+//Route::get('reset-password/{token}', [\App\Http\Controllers\PasswordResetController::class, 'inputNewPassword'])
+//    ->middleware('guest')->name('password.reset');
+//Route::post('reset-password', [\App\Http\Controllers\PasswordResetController::class, 'resetPassword']);
 
+Route::prefix('password')->group( function () {
+    Route::get('/forgot', [\App\Http\Controllers\PasswordForgotController::class, 'create']);
+    Route::post('/forgot', [\App\Http\Controllers\PasswordForgotController::class, 'store']);
+    Route::get('/reset/{token}', [\App\Http\Controllers\PasswordResetController::class, 'create'])->name('password.reset');
+    Route::post('/reset', [\App\Http\Controllers\PasswordResetController::class, 'store']);
+})->middleware('guest');
