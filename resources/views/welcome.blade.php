@@ -1,7 +1,6 @@
 @extends('components.layout')
 @section('head')
     <meta name="description" content="{{ $page_description }}">
-    <p>渲染的字樣</p>
 @endsection
 
 {{--<x-layout>--}}
