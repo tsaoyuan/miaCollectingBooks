@@ -20,7 +20,8 @@
     </div>
 </div>
 
-    {{ $slot }}
+{{--    {{ $slot }}--}}
+@yield('content')
     <x-flash/>
 
 </body>
