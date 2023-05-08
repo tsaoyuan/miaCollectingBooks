@@ -15,12 +15,12 @@ class EmailVerifyController extends Controller
     public function store(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect('/');
+        return redirect('/profile');
     }
 
     public function resend(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
-        return redirect('/profile')->with('message', 'Verification link sent!');
+        return redirect('/')->with('message', 'Verification link sent!');
     }
 }

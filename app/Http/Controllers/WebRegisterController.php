@@ -40,6 +40,6 @@ class WebRegisterController extends Controller
 //        Mail::to($user->email)->send(new UserRegisterEmail($user));
         event(new Registered($user));
 
-        return redirect('/')->with('success', 'Your account has been created.');
+        return redirect('/email/verify/link')->with('success', 'Your account has been created.');
     }
 }
