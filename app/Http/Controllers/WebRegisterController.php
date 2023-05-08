@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\UserRegisterEmail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +37,8 @@ class WebRegisterController extends Controller
 
         auth()->login($user);
 
-        Mail::to($user->email)->send(new UserRegisterEmail($user));
+//        Mail::to($user->email)->send(new UserRegisterEmail($user));
+        event(new Registered($user));
 
         return redirect('/')->with('success', 'Your account has been created.');
     }

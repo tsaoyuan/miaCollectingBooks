@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\UserRegisterEmail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -47,7 +48,8 @@ class RegisterController extends Controller
                 $validated, ['password' => Hash::make($validated['password'])]
             )
         );
-        Mail::to($user->email)->send(new UserRegisterEmail($user));
+//        Mail::to($user->email)->send(new UserRegisterEmail($user));
+        event(new Registered($user));
 
 //        return 'registered';
 //        return response([

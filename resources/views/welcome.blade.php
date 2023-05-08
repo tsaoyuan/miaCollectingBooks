@@ -1,4 +1,4 @@
-@extends('components.layout')
+@extends('components.layout_background')
 @section('head')
     <meta name="description" content="{{ $page_description }}">
 @endsection
@@ -20,7 +20,7 @@
                 @if(auth()->check())
                     <p class="mt-6 text-lg leading-8 text-gray-600">Welcome, {{ auth()->user()->name }}</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
-                        <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">開始旅程</a>
+                        <a href="/profile" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">開始旅程</a>
                     </div>
 
                 @endif

@@ -18,7 +18,7 @@
         </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
+        <a href="/profile" class="text-sm font-semibold leading-6 text-gray-900">Personal Profile</a>
 
         <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
 
