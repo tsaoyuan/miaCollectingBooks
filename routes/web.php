@@ -30,13 +30,6 @@ Route::prefix('auth')->group(function () {
     Route::get('/{provider}/callback', [\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
 });
 
-//Route::get('forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'create'])
-//    ->middleware('guest')->name('password.request');
-//Route::post('forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'store']);
-//Route::get('reset-password/{token}', [\App\Http\Controllers\PasswordResetController::class, 'inputNewPassword'])
-//    ->middleware('guest')->name('password.reset');
-//Route::post('reset-password', [\App\Http\Controllers\PasswordResetController::class, 'resetPassword']);
-
 Route::prefix('password')->group( function () {
     Route::get('/forgot', [\App\Http\Controllers\PasswordForgotController::class, 'create']);
     Route::post('/forgot', [\App\Http\Controllers\PasswordForgotController::class, 'store']);
