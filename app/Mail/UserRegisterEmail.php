@@ -40,7 +40,8 @@ class UserRegisterEmail extends Mailable
         return new Content(
             view: 'email',
             with: [
-                'user' => $this->user,
+                'user' => $this->user->name,
+                'email' => $this->user->email,
             ],
         );
     }
