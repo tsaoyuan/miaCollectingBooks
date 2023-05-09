@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Events\SlackNotice;
-use App\Events\TestingEvents;
-use App\Listeners\TestingNotify;
+
+use App\Events\UserEmailVerified;
+use App\Listeners\WelcomeLetter;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
             SendEmailToAdmin::class,
+        ],
+        UserEmailVerified::class => [
+          WelcomeLetter::class,
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             // ... other providers
