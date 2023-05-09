@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,14 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisterEmail extends Mailable
+class UserRegistedNotifyToAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(protected User $user)
+    public function __construct(protected $user)
     {
         //
     }
@@ -28,7 +27,7 @@ class UserRegisterEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Registed Successful!',
+            subject: '新的使用者註冊！',
         );
     }
 
@@ -38,10 +37,10 @@ class UserRegisterEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emailNotification.email',
+            view: 'emailNotification.userRegistedToAdmin',
             with: [
                 'user' => $this->user,
-            ],
+            ]
         );
     }
 
