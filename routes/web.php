@@ -38,9 +38,9 @@ Route::prefix('password')->group( function () {
 })->middleware('guest');
 
 Route::prefix('email/verify')->group( function () {
-    Route::get('/link', [\App\Http\Controllers\EmailVerifyController::class, 'create'])->middleware('auth')->name('verification.notice');
-    Route::get('/{id}/{hash}', [\App\Http\Controllers\EmailVerifyController::class, 'store'])->middleware(['auth', 'signed'])->name('verification.verify');
-    Route::post('/notification', [\App\Http\Controllers\EmailVerifyController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    Route::get('/link', [\App\Http\Controllers\WebEmailVerifyController::class, 'create'])->middleware('auth')->name('verification.notice');
+    Route::get('/{id}/{hash}', [\App\Http\Controllers\WebEmailVerifyController::class, 'store'])->middleware(['auth', 'signed'])->name('verification.verify');
+    Route::post('/notification', [\App\Http\Controllers\WebEmailVerifyController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 });
 Route::get('profile', function() {
     return view('sessions.profile');
